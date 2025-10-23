@@ -4,7 +4,9 @@ The Black-Box Optimization (BBO) Capstone Project is a machine learning challeng
 
 The overall goal is to develop strategies that intelligently select input queries to maximize the output of these functions. This involves balancing exploration (trying new regions) and exploitation (focusing on known good areas), while working under uncertainty and with minimal data.
 
-This challenge mirrors real-world machine learning tasks such as hyperparameter tuning, experimental design, and reinforcement learning, where decisions must be made with incomplete information and noisy feedback. It helps build skills in adaptive modeling, optimization, and technical communication — all essential for a career in data science or applied machine learning.
+The BBO capstone has been a great way to sharpen my machine learning skills in a realistic setting. It’s helped me learn how to make smart decisions with limited data — something that comes up all the time in real-world projects like tuning models or running experiments. I’ve also had the chance to work with techniques like Gaussian Processes and SVMs, and combine them into a strategy that adapts over time.
+
+Beyond the technical side, it’s taught me how to explain my thinking clearly — documenting my approach, justifying choices, and reflecting on results. That’s a big part of working in data science, whether I’m collaborating with a team or sharing work with future employers.
 
 ### Functions in Scope
 

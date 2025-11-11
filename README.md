@@ -47,6 +47,8 @@ Each week, the model receives past input–output data for each function and mus
   - Function 6: `-0.71`  
   - Function 8: `9.836`
 
+---
+
 ## 🎯 Section 3: Challenge Objectives
 
 The primary objective of the BBO Capstone Project is to **maximize** the output of eight unknown black-box functions. Each function represents a different real-world scenario, ranging from hyperparameter tuning to chemical yield optimization. The challenge is to identify high-performing input regions using limited feedback and no access to the internal structure of the functions.
@@ -62,40 +64,28 @@ The primary objective of the BBO Capstone Project is to **maximize** the output 
 - **Dimensionality**: Input spaces range from 2D to 8D, increasing complexity and risk of overfitting.
 - **Delayed Feedback**: Outputs are returned after submission, requiring careful planning and iterative strategy updates.
 
-The challenge is to build models that learn from sparse input–output data, adapt over time, and balance exploration of new regions with exploitation of known high-performing areas.
+---
 
 ## 🧪 Section 4: Technical Approach
 
 This section documents my evolving strategy across the first three query submissions of the BBO capstone project. As the challenge progresses, I continue refining my approach to better model the unknown functions and select high-performing queries.
 
 ### Week 1–2: GP-Based Exploration
-
-In the initial rounds, I used **Gaussian Process (GP) regression** to model each function. I experimented with different kernels including Matern, RBF, and RationalQuadratic, and applied acquisition functions such as **Upper Confidence Bound (UCB)** and **Expected Improvement (EI)** to guide query selection.
-
-- Candidate points were generated randomly across the input space.
-- Kernel parameters were tuned heuristically based on model fit and acquisition behavior.
-- Strategy focused on broad exploration to understand each function’s landscape.
+- Used **Gaussian Process (GP) regression** with kernels (Matern, RBF, RationalQuadratic).  
+- Applied acquisition functions (**UCB**, **EI**) to balance exploration and exploitation.  
+- Candidate points generated randomly across the input space.  
 
 ### Week 3: SVM-Guided Filtering
-
-In Week 3, I introduced **Support Vector Machines (SVMs)** to classify regions of the input space as “promising” or “not promising.” This helped filter out low-potential candidates before applying GP acquisition scores.
-
-- Trained soft-margin SVMs using past input–output data.
-- Used kernel SVMs to capture non-linear decision boundaries.
-- Combined SVM confidence scores with GP predictions to select final queries.
-
-This hybrid approach improved efficiency by reducing wasted queries and focusing on regions with higher likelihood of success.
+- Introduced **Support Vector Machines (SVMs)** to classify regions as promising vs not promising.  
+- Combined SVM confidence scores with GP predictions to select final queries.  
+- Improved efficiency by reducing wasted queries.  
 
 ### Exploration vs Exploitation Strategy
-
-I balance exploration and exploitation dynamically based on function behavior:
-
-- **Exploit**: For functions with strong prior outputs (e.g., Function 5 and Function 8), I sample near known peaks.
-- **Explore**: For noisy or uncertain functions (e.g., Function 1 and Function 6), I use UCB and SVM filtering to explore new regions.
-- **Mixed**: For functions with moderate or deceptive behavior (e.g., Function 3 and Function 7), I alternate strategies based on model confidence.
+- **Exploit**: Sample near known peaks (Functions 5, 8).  
+- **Explore**: Use UCB + SVM filtering for noisy functions (Functions 1, 6).  
+- **Mixed**: Alternate strategies for moderate functions (Functions 3, 7).  
 
 ### Function-Specific Strategy Highlights
-
 | Function    | Strategy Used                          | Notes |
 |-------------|----------------------------------------|-------|
 | Function 1  | GP + SVM filtering                     | Flat surface, cautious exploration |
@@ -107,12 +97,23 @@ I balance exploration and exploitation dynamically based on function behavior:
 | Function 7  | GP + alternating acquisition functions | Mixed behavior, adaptive strategy |
 | Function 8  | GP + kernel SVM                        | High-dimensional, complex interactions |
 
-### What Makes My Approach Unique
+---
 
-- I combine **Bayesian modeling** with **classification-based filtering** to guide query selection.
-- I adapt strategies per function, rather than using a one-size-fits-all approach.
-- I visualize input–output patterns and monitor model confidence to avoid overfitting.
-- I treat this as a real-world optimization task — learning iteratively, tuning models, and balancing risk.
+## 📖 Section 5: Technical Justification & References
 
-This evolving strategy helps me make informed decisions under uncertainty and prepares me for complex ML tasks in real-world scenarios.
+My current black‑box optimisation (BBO) approach is built around Gaussian Process (GP) surrogates combined with acquisition functions like Expected Improvement (EI) and Upper Confidence Bound (UCB). This choice is justified because GPs provide a principled way to model uncertainty, while acquisition functions balance exploration and exploitation. I also experimented with neural surrogates (MLPRegressor) to capture non‑stationary behaviour. These decisions are supported by free tutorials such as Kelta’s Datacamp article on mastering Bayesian optimisation, which explains why acquisition functions are effective, and by the scikit‑learn documentation, which provides reliable implementations of GP regression and kernels.
 
+To make my reasoning clear, I document the foundations of my approach here:
+
+### Main Justification
+- **Gaussian Processes + Acquisition Functions**: Supported by free tutorials like [Datacamp’s “Mastering Bayesian Optimisation”](https://www.datacamp.com/blog/mastering-bayesian-optimization-in-data-science).  
+- **SVM Filtering**: Inspired by scikit-learn’s open documentation on [DecisionTreeRegressor](https://scikit-learn.org/stable/modules/generated/sklearn.tree.DecisionTreeRegressor.html) and [GaussianProcessRegressor](https://scikit-learn.org/stable/modules/generated/sklearn.gaussian_process.GaussianProcessRegressor.html).  
+- **Neural Surrogates**: Reinforced by Michael Nielsen’s free book [Neural Networks and Deep Learning](http://neuralnetworksanddeeplearning.com/).  
+- **Incremental Refinement Mindset**: Inspired by Andrej Karpathy’s blog [“What I learned from competing against a ConvNet on ImageNet”](http://karpathy.github.io/2014/09/02/what-i-learned-from-competing-against-a-convnet-on-imagenet/).  
+- **Frameworks**: Guided by free tutorials like [PyTorch’s 60-Minute Blitz](https://pytorch.org/tutorials/beginner/deep_learning_60min_blitz.html) and [TensorFlow Playground](https://playground.tensorflow.org).
+
+### How I Document Choices
+- **README.md**: Summarises design choices and links to free resources.  
+- **References.md**: Contains a full list of free/open references (blogs, docs, tutorials, YouTube).  
+- **Code Comments**: Explain why specific kernels, surrogates, or acquisitions were chosen.  
+- **Notebooks**: Include plots and tables showing how theory translates into practice

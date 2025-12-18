@@ -117,3 +117,12 @@ To make my reasoning clear, I document the foundations of my approach here:
 - **References.md**: Contains a full list of free/open references (blogs, docs, tutorials, YouTube).  
 - **Code Comments**: Explain why specific kernels, surrogates, or acquisitions were chosen.  
 - **Notebooks**: Include plots and tables showing how theory translates into practice
+
+
+## 📖 Section 6: DataSheet
+[Data Sheet](https://github.com/miamvi/Imperial_Capstone_2025/blob/main/data_sheet.md)
+
+## 📖 Section 7: Model Card
+[Model Card](https://github.com/miamvi/Imperial_Capstone_2025/blob/main/model_card.md)
+
+
